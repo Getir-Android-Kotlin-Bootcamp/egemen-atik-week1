@@ -72,6 +72,48 @@ fun main() {
     simpleTypeCheckFunction(true)
     simpleTypeCheckFunction(24)
     printSeparatorDashes()
+    
+    // page 38
+    println("This is an example for page 38")
+    println(calculatePower(35, 2))
+    println(calculatePower(17, 4))
+    println(calculatePower(1923))
+    printSeparatorDashes()
+    
+    // page 38
+    println("This is an example for page 40")
+    println("Is 3 in (1, 2, 3, 4, 5): ${isInList(listOf(1, 2, 3, 4, 5), 3)}")
+    println("Is \"grape\" in (\"apple\", \"banana\", \"orange\"): ${isInList(listOf("apple", "banana", "orange"), "grape")}")
+    println("Is 5.0 in (): ${isInList(emptyList<Double>(), 5.0)}")
+    printSeparatorDashes()
+    
+    // page 43, 44
+    println("This is an example for pages 43, 44")
+    val constantsMap = mapOf("pi" to 3.14, "e" to "2.99", "c" to 3 * 100000000)
+    val convertedMap = convertToMap(listOf(1, 2.5, 'c'), listOf("one", true, 19))
+    for ((k, v) in constantsMap) {
+        println("$k -> $v")
+    }
+    for ((k, v) in convertedMap) {
+        println("$k -> $v")
+    }
+    printSeparatorDashes()
+    
+    // page 45
+    println("This is an example for page 45")
+    val lazyInt: Int by lazy {
+        println("If you decided to use me, then use me in isPrime function")
+        59
+    }
+    println("Is $lazyInt prime: ${simpleRangeReturnFunction(lazyInt)}")
+    printSeparatorDashes()
+    
+    // page 46
+    println("This is an example for page 46")
+    val tempString = "Make your life spectacular"
+    println("There are ${tempString.vowelCount()} many vowels in \"$tempString\"")
+    println("Is 15 a triangular number: ${15.isTriangularNumber()}")
+    printSeparatorDashes()
 }
 
 // page 9
@@ -214,7 +256,7 @@ fun simpleRangeFunction(number: Int) {
     println()
 }
 
-// page 20
+// page 20, 39
 fun simpleCollectionFunction() {
     println("This is an example for page 20")
     val names = listOf(
@@ -254,7 +296,7 @@ fun simpleNullableFunction(name: String?) {
     }
 }
 
-// page 22
+// page 22, 41
 fun simpleTypeCheckFunction(obj: Any) {
     when (obj) {
         is String	-> println("Passed object is a String")
@@ -263,4 +305,67 @@ fun simpleTypeCheckFunction(obj: Any) {
         is Boolean	-> println("Passed object is a Boolean")
         is String	-> println("Passed object is another type")
     }
+}
+
+// page 37
+data class FootballPlayer(
+	val id: Long,
+    val name: String,
+    val surname: String,
+    val kitNumber: Int,
+    val position: String
+)
+
+// page 38
+fun calculatePower(base: Int, power: Int = 1): Int {
+    var result = 1;
+    for (num in 1..power) {
+        result *= base
+    }
+    return result
+}
+
+// page 40
+fun <T> isInList(list: List<T>, element: T): Boolean {
+    for (item in list) {
+        if (item == element) return true
+    }
+    return false
+}
+
+// page 43
+fun <T> convertToMap(keyList: List<T>, valueList: List<T>): Map<T, T> {
+    val resultMap = mutableMapOf<T, T>()
+    for (i in keyList.indices) {
+        resultMap[keyList[i]] = valueList[i]
+    }
+    return resultMap
+}
+
+// page 46
+fun String.vowelCount(): Int {
+    var count = 0
+    for (char in this) {
+        if (char.isVowel()) {
+            count++
+        }
+    }
+    return count
+}
+
+fun Char.isVowel(): Boolean {
+    val lowercased = this.lowercase()
+    return lowercased == "a" || lowercased == "e" || lowercased == "i" || lowercased == "o" || lowercased == "u"
+}
+
+fun Int.isTriangularNumber(): Boolean {
+    if (this < 0) return false
+    var index = 0
+    var result = 0
+    while (result < this) {
+        result = index * (index + 1) / 2
+        if (result == this) return true
+        index++
+    }
+    return false
 }
