@@ -20,6 +20,22 @@ fun main() {
     println("Max distance that second car which has ${secondCar.numberOfGears} gears can go is: ${secondCar.distanceToGo} km")
     printSeparatorDashes()
 
+    // page 14
+    basicStringFunction()
+    printSeparatorDashes()
+
+    // page 15
+    println("This is an example for page 15")
+    println(simpleIfFunctionMultipleLines(16))
+    println(simpleIfFunctionSingleLine(9))
+    printSeparatorDashes()
+
+    // page 16
+    println("This is an example for page 16")
+    simpleForLoopFunction(listOf(1, 2, 3, 4, 5, 6, 7, 8), true)
+    val tempList = simpleForLoopReturnFunction(listOf(1, 2, 3, 4, 5, 6, 7, 8), false)
+    println(tempList)
+    printSeparatorDashes()
 }
 
 // page 9
@@ -79,4 +95,42 @@ class ModelA(val amountOfFuel: Double, override val numberOfGears: Int): Car(num
 
 class ModelB(val amountOfFuel: Double, override val numberOfGears: Int): Car(numberOfGears) {
     val distanceToGo = amountOfFuel / 3
+}
+
+// page 14
+fun basicStringFunction() {
+    println("This is an example for page 14")
+    val s1 = "17 - 8 = ${17 - 8}"
+    val s2 = "${s1.replace("-", "+")}"
+    val s3 = "${s2.replace("${17 - 8}", "${17 + 8}")}"
+    val s4 = "${s3.substring(9)}"
+    println(s1)
+    println(s2)
+    println(s3)
+    println(s4)
+}
+
+// page 15
+fun simpleIfFunctionMultipleLines(age: Int): String {
+    if (age < 18) return "There are ${18 - age} more years until you can get a driver's license"
+    else return "You can get a driver's license anytime you want"
+}
+
+fun simpleIfFunctionSingleLine(number: Int) = if (number < 0) true else false
+
+// page 16
+fun simpleForLoopFunction(list: List<Int>, isEven: Boolean): Unit {
+    for (index in list.indices) {
+        if (isEven && list[index] % 2 == 0) println("Even number ${list[index]} is found at index $index")
+        else if (!isEven && list[index] % 2 == 1) println("Odd number ${list[index]} is found at index $index")
+    }
+}
+
+fun simpleForLoopReturnFunction(list: List<Int>, isEven: Boolean): List<Int> {
+    val returnList = mutableListOf<Int>()
+    for (element in list) {
+        if (isEven && element % 2 == 0) returnList.add(element)
+        else if (!isEven && element % 2 == 1) returnList.add(element)
+    }
+    return returnList
 }
