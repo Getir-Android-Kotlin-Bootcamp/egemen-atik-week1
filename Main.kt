@@ -36,6 +36,42 @@ fun main() {
     val tempList = simpleForLoopReturnFunction(listOf(1, 2, 3, 4, 5, 6, 7, 8), false)
     println(tempList)
     printSeparatorDashes()
+    
+    // page 17
+    println("This is an example for page 17")
+    var isPrime = simpleWhileLoopFunction(17)
+    println("Is 17 a prime number: $isPrime")
+    isPrime = simpleWhileLoopFunction(35)
+    println("Is 35 a prime number: $isPrime")
+    printSeparatorDashes()
+    
+    // page 18
+    println("This is an example for page 18")
+    println(simpleWhenFunction(1.76, 75.0))
+    printSeparatorDashes()
+    
+    // page 19
+    simpleRangeFunction(21)
+    println("Is 41 prime: ${simpleRangeReturnFunction(41)}")
+    printSeparatorDashes()
+    
+    // page 20
+    simpleCollectionFunction()
+    printSeparatorDashes()
+    
+    // page 21
+    println("This is an example for page 21")
+    simpleNullableFunction(null)
+    simpleNullableFunction("Egemen Atik")
+    printSeparatorDashes()
+    
+    // page 22
+    println("This is an example for page 22")
+    simpleTypeCheckFunction(3.14)
+    simpleTypeCheckFunction("Egemen Atik")
+    simpleTypeCheckFunction(true)
+    simpleTypeCheckFunction(24)
+    printSeparatorDashes()
 }
 
 // page 9
@@ -133,4 +169,98 @@ fun simpleForLoopReturnFunction(list: List<Int>, isEven: Boolean): List<Int> {
         else if (!isEven && element % 2 == 1) returnList.add(element)
     }
     return returnList
+}
+
+// page 17
+fun simpleWhileLoopFunction(number: Int): Boolean {
+    if (number < 2) return false
+    var index = 2
+    while (index < number) {
+        if (number % index == 0) return false
+        index++
+    }
+    return true
+}
+
+// page 18
+fun simpleWhenFunction(height: Double, weight: Double): String {
+    val hMI = weight / (height * height)
+    return when {
+        hMI !is Double	-> "Wrong inputs"
+        hMI < 0	-> "Wrong inputs"
+        hMI < 18.5 	-> "Underweight"
+        hMI < 24.9	-> "Healthy Weight"
+        hMI < 29.9	-> "Overweight"
+        else -> "Obese"
+    }
+}
+
+// page 19
+fun simpleRangeReturnFunction(number: Int): Boolean {
+    for (divider in 2 until number) {
+        if (number % divider == 0) return false
+    }
+    return true
+}
+
+fun simpleRangeFunction(number: Int) {
+    println("This is an example for page 19")
+    print("Even numbers between 0 and $number are as follows: ")
+    var startNumber = number
+    if (number % 2 == 1) startNumber--
+    for (num in startNumber downTo 0 step 2) {
+        print("$num ")
+    }
+    println()
+}
+
+// page 20
+fun simpleCollectionFunction() {
+    println("This is an example for page 20")
+    val names = listOf(
+        "Emma", "Liam", "Olivia", "Noah", "Ava","William",
+        "Sophia", "James", "Isabella", "Benjamin"
+    )
+    
+    names
+    	.filter { startsWithVowel(it) }
+        .forEach { print("$it ") }
+    
+    println()
+    
+    val lengths = names
+    	.filter { startsWithVowel(it) }
+        .map { it.length }
+        
+   	lengths.forEach { print("$it ") }
+    
+    println()
+    println("Each name length is bigger than 5: ${lengths.all { it > 5 }}")
+    println("Sum of lengths: ${lengths.reduce { acc, i -> acc + i }}")
+}
+
+fun startsWithVowel(str: String): Boolean {
+    val lowercaseStr = str.lowercase()
+    return lowercaseStr.startsWith("a") || lowercaseStr.startsWith("e") || lowercaseStr.startsWith("i") 
+    		|| lowercaseStr.startsWith("o") || lowercaseStr.startsWith("u")
+}
+
+// page 21
+fun simpleNullableFunction(name: String?) {
+    if (name == null) {
+        println("Hello, my name is John Doe")
+    } else {
+        println("Hello, my name is $name")
+    }
+}
+
+// page 22
+fun simpleTypeCheckFunction(obj: Any) {
+    when (obj) {
+        is String	-> println("Passed object is a String")
+        is Double	-> println("Passed object is a Double")
+        is Int		-> println("Passed object is a Int")
+        is Boolean	-> println("Passed object is a Boolean")
+        is String	-> println("Passed object is another type")
+    }
 }
